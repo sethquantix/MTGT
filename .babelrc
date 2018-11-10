@@ -1,0 +1,22 @@
+{
+  "presets": [
+    ["@babel/env", {
+      "targets": {
+        "browsers": "last 2 Chrome versions",
+        "node": "current"
+      }
+    }],
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    "@babel/transform-react-constant-elements",
+    "@babel/transform-react-inline-elements",
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-class-properties",
+    "transform-react-remove-prop-types",
+    "transform-react-pure-class-to-function",
+    ["babel-plugin-root-import", {
+      "rootPathSuffix": "."
+    }]
+  ]
+}
