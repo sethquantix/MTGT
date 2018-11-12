@@ -42,8 +42,44 @@ const twitchProfile = async token => {
     return await res.json();
 };
 
+const getRegistered = async id => {
+    const res = await fetch(uri + '/events/registered', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + id
+        }
+    });
+    return await res.json();
+};
+
+const getCreated = async id => {
+    const res = await fetch(uri + '/events/created', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + id
+        }
+    });
+    return await res.json();
+};
+
+const getAvailable = async ({ id, scope }) => {
+    console.log(id, scope);
+    const res = await fetch(uri + '/events/available?scope=' + scope, {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + id
+        }
+    });
+    return await res.json();
+};
+
 const Api = {
     getUsers,
+    Events: {
+        getRegistered,
+        getCreated,
+        getAvailable
+    },
     Twitch: {
         twitchAuth,
         twitchLogin,

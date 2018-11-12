@@ -1,0 +1,108 @@
+
+
+.top {
+    z-index: 1000;
+}
+
+.login {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: white;
+    border-color: white;
+    background-color: #423070;
+
+}
+
+.selected-box {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.diamond {
+    width: 10px;
+    height: 10px;
+    border: 1px solid darkgrey;
+    transform:rotate(45deg);
+    position: absolute;
+    background-color: #181c24;
+}
+
+.selected-cursor {
+    position: absolute;
+    bottom: 4px;
+    left: calc(50% - 11px);
+}
+
+.glowing {
+    background-color: orangered;
+}
+
+.button-login:hover {
+    background-image: linear-gradient(#181c24, #282c34);
+    cursor: pointer;
+}
+
+.button-logout:hover {
+    background-color: darkviolet;
+    transition: background-color 0.5s ease;
+}
+
+.button-item {
+    min-width: 160px;
+    border-right: 1px solid #282c34;
+}
+
+.button-logout {
+    background-color: #181c24;
+    transition: background-color 0.5s ease;
+    border-radius: 0px 0px 0px 10px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.button-logout-container {
+    display: flex;
+    border-radius: 0px 0px 0px 10px;
+    align-items: center;
+    position: absolute;
+    height: 50px;
+    width: 160px;
+    top: 82px;
+    left: 0;
+}
+
+.button-hovered {
+    padding: 0px 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-hovered:hover {
+    background-image: linear-gradient(#181c24, #282c34);
+    cursor: pointer;
+}
+
+.button-selected {
+    background-image: linear-gradient(#141a21, #242a31);
+}
+
+.button-login {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 160px;
+    padding: 0;
+    flex-shrink: 0;
+    flex-grow: 0;
+}

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
+import { Spring } from 'react-spring';
+
 import Link from "Components/Link";
 import Login from "Containers/AccountContainer";
 import Profile from "Components/ProfileButton";
@@ -13,8 +15,9 @@ class Header extends Component {
         super(props);
         this.items = [
             {name: "Home", path: "/"},
+            {name: "Manage", path: "/manage"},
             {name: "My Tournaments", path: "/events"},
-            {name: "Streams.jsx", path: "/streams"}
+            {name: "Streams", path: "/streams"}
         ];
     }
 
@@ -30,16 +33,18 @@ class Header extends Component {
 
     selected = (select, name) => {
         console.log(select, this.props.location);
-        const className = "diamond " + (select ? "glowing" : "");
-        return <div className={"selected-box"}>
-            <div className={"selected-cursor"}>
-                <div className={className}/>
-            </div>
-            <div>{name}</div>
-        </div>
+        return <Spring from={{bg: "#181c24"}} to={{bg: select ? "#ff4500" : "#181c24"}}>
+            {props => <div className={"selected-box"}>
+                <div className={"selected-cursor"}>
+                    <div className={"diamond"} style={{backgroundColor: props.bg}}/>
+                </div>
+                <div>{name}</div>
+            </div>}
+        </Spring>
     };
 
     render() {
+
         return <div className="App-header">
             <div className="App-header-nav">
                 {this.items.map(({name, path}) => <Link classes="button-hovered button-item" path={path}>

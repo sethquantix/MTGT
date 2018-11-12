@@ -6,6 +6,7 @@ import Profile from 'Reducers/Profile';
 import Events from 'Reducers/Events';
 
 import { twitchLoginSaga, loginSaga, iconSaga } from "Sagas/Profile";
+import {fetchAvailableSaga, fetchCreatedSaga, fetchRegisteredSaga} from "Sagas/Events";
 
 const reducer = combineReducers({
     ProfileReducer: Profile,
@@ -21,5 +22,8 @@ const store = createStore(
 sagaMiddleware.run(twitchLoginSaga);
 sagaMiddleware.run(loginSaga);
 sagaMiddleware.run(iconSaga);
+sagaMiddleware.run(fetchRegisteredSaga);
+sagaMiddleware.run(fetchCreatedSaga);
+sagaMiddleware.run(fetchAvailableSaga);
 
 export default store;

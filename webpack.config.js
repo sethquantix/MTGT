@@ -29,7 +29,7 @@ module.exports = {
             },
             {
                 test: /\.svg$/,
-                loader: 'svg-inline-loader'
+                loader: 'react-svg-loader'
             },
             {
                 test: /\.(html)$/,
@@ -53,7 +53,8 @@ module.exports = {
             Views: path.resolve(__dirname, 'src/views/'),
             Widgets: path.resolve(__dirname, 'src/widgets/'),
             Reducers: path.resolve(__dirname, "src/reducers"),
-            Root: path.resolve(__dirname, "src")
+            Root: path.resolve(__dirname, "src"),
+            Images: path.resolve(__dirname, "src/imgs/")
         }
     },
 }

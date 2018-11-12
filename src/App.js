@@ -1,19 +1,42 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
+import { createMuiTheme, MuiThemeProvider, withTheme } from '@material-ui/core/styles';
 import { Switch, Route } from 'react-router-dom';
-import Loadable from "react-loadable";
+
+import blue from '@material-ui/core/colors/blue';
+
 import './App.css';
+import './Event.css';
+import './Components.css';
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: "#181c24"
+        },
+        secondary: {
+            main: "#61dafb"
+        },
+        type: 'dark'
+    },
+});
+
 import Home from  'Views/Home';
 import Header from  'Views/Header';
 
-import Loading from "./components/Loading";
+const RenderApp = withTheme()(props => {
+    return <div className="App-main">
+        <Header />
+        <Home />
+    </div>
+});
 
 class App extends Component {
   render() {
-    return <div className="App-main">
-            <Header />
-            <Home />
-        </div>;
+
+    return <MuiThemeProvider theme={theme}>
+        <RenderApp />
+    </MuiThemeProvider>;
   }
 }
 

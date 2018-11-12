@@ -1,0 +1,36 @@
+
+.Event-body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex: 1;
+    overflow-y: scroll;
+    padding: 25px;
+}
+
+.Event-card {
+    background-color: #191F2B;
+    min-height: 300px;
+    height: fit-content;
+    margin: 10px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.Event-card-header-title {
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.Event-card-header {
+    align-self: stretch;
+    border-radius: 5px;
+    margin: 10px;
+    background-color: #282c34;
+    color: cornflowerblue;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
