@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server",
-    "build": "react-scripts build",
+    "build": "./node_modules/.bin/webpack --config webpack.config.prod.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
