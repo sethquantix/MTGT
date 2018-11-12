@@ -7,7 +7,7 @@ const Link = ({ name, path, classes, replace =false, location, children }) => {
     classes = Array.isArray(classes) ? classes : [classes];
     if (selected)
         classes.push("button-selected");
-    const className = classes.reduce((x, next) => x + " " + next, "button-hovered");
+    const className = classes.reduce((x, next) => x + " " + next, "");
     return <RouterLink to={path} replace={replace} className={className}
                        style={{ textDecoration: 'none', color: selected ? "cornflowerblue" : "white" }}>
         {children ? children : <div className="button">{name}</div>}

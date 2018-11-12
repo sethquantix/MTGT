@@ -27,7 +27,9 @@ class AccountContainer extends Component {
     render() {
         const { cookies } = this.props;
         console.log(cookies);
-        return <Button classes={"button-login"} name="login" onClick={this.twitchLogin.bind(this, cookies)}/>;
+        return <Button className={"button-login"} name="login" onClick={this.twitchLogin.bind(this, cookies)}>
+            <div className="login">Login with Twitch</div>
+        </Button>;
     }
 }
 

@@ -1,7 +1,8 @@
+import Storage from "Root/Storage";
 
 const initialState = {
     connected: false,
-    profile: {},
+    profile: { twitch: {}},
     error: null,
     token: null,
     connecting: false
@@ -20,13 +21,14 @@ export const ActionsTypes = {
 
 const actionLogin = (state, payload) => {
     return {...state, connecting: true, token: payload};
-}
+};
 
-const actionLoginSucceed = (state) => {
-    return {...state, connected: true, connecting: false, profile: {}};
+const actionLoginSucceed = (state, {data}) => {
+    return {...state, connected: true, connecting: false, token: data, profile: {}};
 };
 
 const actionAuthSucceed = (state, payload) => {
+    Storage.Store("id", payload.data);
     return {...state, connected: true, profile: {}, token: payload.data, connecting: false};
 };
 
@@ -39,9 +41,15 @@ const actionLoginFailed = (state, payload) => {
     return {...state, connecting: false,token: null };
 };
 
+const actionLogout = (state) => {
+    return {...state, connected: false, token: null };
+};
+
+
 export const getActionTwitchAuth = code => ({type: ActionsTypes.TWITCH_AUTH, payload: code});
 export const getActionLogin = token => ({type: ActionsTypes.LOGIN, payload: token});
 export const getActionTwitchProfile = token => ({type: ActionsTypes.GET_TWITCH_PROFILE, payload: token});
+export const getActionLogout = () => ({type: ActionsTypes.LOGOUT, payload: {}});
 
 export const setActionLoginError = msg => ({type: ActionsTypes.LOGIN_FAILED, payload: msg});
 
@@ -51,6 +59,9 @@ export default ( state = initialState, action) => {
         case ActionsTypes.TWITCH_AUTH:
             state = actionLogin(state, action.payload);
             break ;
+        case ActionsTypes.LOGOUT:
+            state = actionLogout(state);
+            break ;
         case ActionsTypes.AUTH_SUCCEED:
             state = actionAuthSucceed(state, action.payload);
             break ;
@@ -58,7 +69,7 @@ export default ( state = initialState, action) => {
             state = actionSetTwitch(state, action.payload);
             break ;
         case ActionsTypes.LOGIN_SUCCEED:
-            state = actionLoginSucceed(state);
+            state = actionLoginSucceed(state, action.payload);
             break ;
         case ActionsTypes.LOGIN_FAILED:
             state = actionLoginFailed(state, action.payload);

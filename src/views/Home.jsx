@@ -10,6 +10,7 @@ import Main from "Views/Main";
 import {withCookies} from "react-cookie";
 import Loading from "Components/Loading";
 import Friends from "Views/Friends";
+import Storage from "Root/Storage";
 
 const components = {
     Profile: Loadable({
@@ -21,14 +22,15 @@ const components = {
 class Home extends Component {
 
     componentDidMount() {
-        const token = this.props.cookies.get("id");
-        if (token)
+        const token = Storage.Get("id");
+        console.log("storage : " + token);
+        if (token && token !== "undefined")
             this.props.login(token);
     }
 
     render() {
-        console.log(`route: ${JSON.stringify(this.props)}`);
-        return <div className="App-main">
+        console.log(this.props.connected);
+        return <div className="App-body">
             {this.props.connected && <Friends />}
             <Switch>
                 <Route path={'/twitchRedirect'} component={TwitchLogin} />

@@ -3,11 +3,13 @@ import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga'
 
 import Profile from 'Reducers/Profile';
+import Events from 'Reducers/Events';
 
 import { twitchLoginSaga, loginSaga, iconSaga } from "Sagas/Profile";
 
 const reducer = combineReducers({
-    ProfileReducer: Profile
+    ProfileReducer: Profile,
+    EventsReducer: Events,
 });
 
 const sagaMiddleware = createSagaMiddleware();

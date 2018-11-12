@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import Loading from "Components/Loading";
 import { parseParameters } from "Utils/Funcs";
 import { getActionTwitchAuth, setActionLoginError} from "Reducers/Profile";
+import Storage from "Root/Storage";
 
 class TwitchLogin extends Component {
 
@@ -23,7 +24,6 @@ class TwitchLogin extends Component {
 
     render() {
         if (this.props.connected) {
-            this.props.cookies.set("id", this.props.token, {path: '/'});
             return <Redirect to={{pathname: "/"}}/>
         }
         if (this.props.failed) {
