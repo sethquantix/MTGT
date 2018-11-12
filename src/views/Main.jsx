@@ -1,13 +1,31 @@
 import React, { Component } from 'react';
-import {withRouter } from 'react-router-dom';
+import { connect } from "react-redux";
+import {Route, Switch, withRouter} from 'react-router-dom';
+import Events from "Views/Events/Events";
+import Streams from "Views/Events/Streams";
+import EventManager from "Views/Events/EventManager";
 
 class Main extends Component {
 
     render() {
-        console.log(this.props.location);
-        return <div style={{paddingLeft: 30, paddingTop: 30}}>Hello, world</div>;
+        return <Switch>
+            <Route path='/events' component={EventManager} />
+            <Route path='/streams' component={Streams} />
+            <Route path="/" component={Events} />
+        </Switch>;
     }
-
 }
 
-export default withRouter(Main);
+const mapStateToProps = state => {
+    return {
+
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+
+    }
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

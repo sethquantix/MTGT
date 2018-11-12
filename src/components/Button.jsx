@@ -1,10 +1,9 @@
 import React from 'react';
 
-const Button = ({ name, onClick, classes, children }) => {
+const Button = ({ name, onClick, className = null, children }) => {
 
-    classes = Array.isArray(classes) ? classes : [classes];
-    const className = classes.reduce((x, next) => x + " " + next, "button-hovered");
-    return <div className={className} onClick={onClick}>
+    className = "button-hovered" + className ? (" " + className) : "";
+    return <div className={className} onClick={onClick} style={{justifyContent: "center"}}>
         {children ? children : <div className="button">
             {name}
         </div>}
