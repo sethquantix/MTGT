@@ -9,7 +9,10 @@ module.exports = {
         filename: "bundle.js"
     },
     plugins: [
-        new HtmlWebpackPlugin()
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname + "/public/index.html"),
+            inject: 'head'
+        })
     ],
     devServer: {
         publicPath: '/',
@@ -28,17 +31,27 @@ module.exports = {
                 use: [ 'style-loader', 'css-loader' ]
             },
             {
-                test: /\.svg$/,
-                loader: 'react-svg-loader'
-            },
-            {
                 test: /\.(html)$/,
                 use: {
                     loader: 'html-loader',
-                    options: {
-                        attrs: [':data-src']
+                    query: {
+                        attrs: [':data-src'],
+                        interpolate: 'require'
                     }
                 }
+            },
+            {
+                test: /\.(gif|png|jpe?g|svg|ico)$/i,
+                use: [
+                    'file-loader',
+                    {
+                        loader: 'image-webpack-loader',
+                        options: {
+                            bypassOnDebug: true, // webpack@1.x
+                            disable: true, // webpack@2.x and newer
+                        },
+                    },
+                ],
             }
         ]
     },

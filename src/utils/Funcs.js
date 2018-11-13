@@ -8,3 +8,4 @@ export const parseParameters = path => {
     }, {});
 };
 
+export const grnRand = () => Math.floor(1 + Math.random() * Math.floor(274));

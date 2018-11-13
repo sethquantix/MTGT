@@ -8,9 +8,9 @@ const styles = theme => ({
     },
 });
 
-const Loading = ({ classes, size }) => {
+const Loading = ({ classes, size, color = "#darkviolet" }) => {
     return <div>
-        <CircularProgress size={size} className={classes.progress}/>
+        <CircularProgress size={size} color={color} className={classes.progress}/>
     </div>;
 };
 

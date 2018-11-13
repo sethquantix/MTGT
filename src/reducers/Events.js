@@ -10,6 +10,8 @@ const defaultState = {
     events: null,
     created: null,
     list: null,
+    channels: [],
+    images: [],
     scope: EVENTS.PUBLIC
 };
 
@@ -20,13 +22,28 @@ export const ActionsTypes = {
     STORE_EVENTS: "store events",
     STORE_CREATED: "store created events",
     STORE_AVAILABLE: "store available events",
+    AVAILABLE_FETCH_FAILED: "available fetch failed",
+    CREATED_FETCH_FAILED: "created fetch failed",
+    EVENTS_FETCH_FAILED: "events fetch failed",
     FETCH_FAILED: "fetch failed",
+
+    SEARCH_STREAMERS: "query streamer",
+    FETCHED_STREAMER: "fetched streamer",
+
+    SEARCH_IMAGES: "query scryfall images",
+    FETCHED_IMAGES: "fetched images",
+
+    EVENTS_CREATE_FAILED: "event creation failed",
+    CREATE_EVENT: "create new event"
 };
 
 export const Actions = {
     GET_AVAILABLE(scope = EVENTS.PUBLIC) { return {type: ActionsTypes.GET_AVAILABLE, payload: {id : Storage.Get("id"), scope: scope } }; },
     get GET_REGISTERED() { return {type: ActionsTypes.GET_REGISTERED, payload: Storage.Get("id") }; },
-    get GET_OWNED() { return {type: ActionsTypes.GET_OWNED, payload: Storage.Get("id") }; }
+    get GET_OWNED() { return {type: ActionsTypes.GET_OWNED, payload: Storage.Get("id") }; },
+    CREATE_EVENT(data) { return {type: ActionsTypes.CREATE_EVENT, payload: {...data, owner: Storage.Get("id")}} },
+    SEARCH_CHANNELS(query = "") { return { type: ActionsTypes.SEARCH_STREAMERS, payload: {query} }},
+    SEARCH_IMAGES(query = "") { return { type: ActionsTypes.SEARCH_IMAGES, payload: {query} }},
 };
 
 const onFetchFailed = (state, {err}) => {
@@ -59,6 +76,21 @@ const EventReducer = (state = defaultState, {type, payload}) => {
             break ;
         case ActionsTypes.STORE_CREATED:
             state = onStoreCreated(state, payload);
+            break ;
+        case ActionsTypes.EVENTS_FETCH_FAILED:
+            state = {...state, events: []};
+            break ;
+        case ActionsTypes.CREATED_FETCH_FAILED:
+            state = {...state, created: []};
+            break ;
+        case ActionsTypes.AVAILABLE_FETCH_FAILED:
+            state = {...state, list: []};
+            break ;
+        case ActionsTypes.FETCHED_STREAMER:
+            state = {...state, channels: payload.res};
+            break ;
+        case ActionsTypes.FETCHED_IMAGES:
+            state = {...state, images: payload.res};
             break ;
         case ActionsTypes.FETCH_FAILED:
             state = onFetchFailed(state, payload);

@@ -106,3 +106,30 @@
     flex-shrink: 0;
     flex-grow: 0;
 }
+.autocomplete:focus {
+    outline: none;
+}
+
+.component-input-container {
+    display: flex;
+    align-items: center;
+}
+
+.component-input {
+    padding: 5px 10px;
+    margin-left: 15px;
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid #282c34;
+    color: white;
+}
+
+.component-input:focus {
+    outline: none;
+    border-bottom-color: #61dafb;
+}
+
+.component-input-name {
+    font-size: 16px;
+    padding: 7px 0px 13px 0px;
+}
