@@ -1,7 +1,7 @@
 
-const client = "ffmytki05p9we8ubrs4tx3jbiprl6j";
+const client = process.env.NODE_ENV === "production" ? "adffdn8fw3qmj1mn9ulk1jw4d9wnq8" : "ffmytki05p9we8ubrs4tx3jbiprl6j";
 
-const uri = process.env.NODE_ENV === "production" ? "http://mtgtournaments.org" : "http://localhost:3000";
+const uri = process.env.NODE_ENV === "production" ? "https://mtgtournaments.org/api" : "http://localhost:3000";
 
 const getUsers = async (payload) => {
     const res = await fetch(uri + "/users");
