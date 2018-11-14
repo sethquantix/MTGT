@@ -9,7 +9,7 @@ const uuidv4 = require('uuid/v4');
 class AccountContainer extends Component {
 
     componentDidMount() {
-        this.CLIENT_ID = "ffmytki05p9we8ubrs4tx3jbiprl6j";
+        this.CLIENT_ID = process.env.NODE_ENV === 'production' ? "adffdn8fw3qmj1mn9ulk1jw4d9wnq8" : "ffmytki05p9we8ubrs4tx3jbiprl6j";
         console.log('node env: ' + process.env.NODE_ENV);
         this.REDIRECT = process.env.NODE_ENV === 'production' ? "https://mtgtournaments.org/twitchRedirect" : "http://localhost:8080/twitchRedirect";
     }
