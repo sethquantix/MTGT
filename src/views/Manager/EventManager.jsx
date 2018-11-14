@@ -33,17 +33,17 @@ class EventManager extends Component {
     };
 
     render() {
-
         return <div className="Event-body">
             <EventCard events={this.props.events} none="Nothing here yet !" className="Event-card-manager" component={Event}>
             </EventCard>
-            {this.state.open ? <NewEvent validate={this.validate} close={this.close} /> : <Button className="Event-new-button" onClick={this.open} >New Event</Button> }
+            {this.props.connected ? this.state.open ? <NewEvent validate={this.validate} close={this.close} /> : <Button className="Event-new-button" onClick={this.open} >New Event</Button> : null }
         </div>;
     }
 }
 
 const mapStateToProps = state => {
     return {
+        connected: state.ProfileReducer.connected,
         events: state.EventsReducer.created
     }
 };

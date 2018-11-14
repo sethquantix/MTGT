@@ -30,7 +30,8 @@ class Home extends Component {
 
     render() {
         console.log(this.props.connected);
-        return <div className="App-body">
+        const style = this.props.connected ? {} : { gridTemplateColumns: "1fr" };
+        return <div className="App-body" style={style}>
             {this.props.connected && <Friends />}
             <Switch>
                 <Route path={'/twitchRedirect'} component={TwitchLogin} />
