@@ -58,7 +58,8 @@ module.exports = {
             Views: path.resolve(__dirname, 'src/views/'),
             Widgets: path.resolve(__dirname, 'src/widgets/'),
             Reducers: path.resolve(__dirname, "src/reducers"),
-            Images: path.resolve(__dirname, "src/imgs/")
+            Images: path.resolve(__dirname, "src/imgs/"),
+	    Root: path.resolve(__dirname, "src/")
         }
     },
 }
