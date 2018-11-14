@@ -10,6 +10,7 @@ class AccountContainer extends Component {
 
     componentDidMount() {
         this.CLIENT_ID = "ffmytki05p9we8ubrs4tx3jbiprl6j";
+        console.log('node env: ' + process.env.NODE_ENV);
         this.REDIRECT = process.env.NODE_ENV === 'production' ? "https://mtgtournaments.org/twitchRedirect" : "http://localhost:8080/twitchRedirect";
     }
 
