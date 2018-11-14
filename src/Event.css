@@ -4,7 +4,7 @@
     flex-direction: column;
     align-items: stretch;
     flex: 1;
-    overflow-y: scroll;
+    height: fit-content;
     padding: 25px;
 }
 
@@ -18,6 +18,115 @@
     align-items: stretch;
 }
 
+.Event-card-manager {
+    min-height: 60px;
+}
+
+.Event-new-button {
+    min-height: 80px;
+}
+
+.Event-new {
+    position: relative;
+    background-color: #191F2B;
+    min-height: 0;
+}
+
+.Event-new-body {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.Event-new-content {
+    display: flex;
+    margin: 5px;
+    flex: 1;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.Event-new-vertical-sep {
+    background-color: #61dafb;
+    width: 1px;
+}
+
+.Event-new-cover-container {
+    flex: 1;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Event-new-data-container {
+    flex: 1;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.Event-new-cover-selector {
+    flex: 1;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Event-image-cover-container {
+    height: 250px;
+    width: 350px;
+}
+
+.Event-new-data-content {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    margin: 0px 20px;
+}
+
+.Event-new-data {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.Event-new-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    margin-left: 5px;
+}
+
+.Event-new-search {
+    flex: 1;
+    margin-right: 30px;
+}
+
+.Event-new-data-title {
+    width: 70%;
+    font-size: 24px;
+}
+
+.Event-new-title-container {
+    flex: 1;
+    justify-content: center;
+    height: 60px;
+}
+
+.Event-new-cover {
+    height: 250px;
+    width: 350px;
+    object-fit: contain;
+
+}
+
 .Event-card-header-title {
     margin-top: 10px;
     margin-left: 20px;
@@ -27,6 +136,7 @@
     align-self: stretch;
     border-radius: 5px;
     margin: 10px;
+    flex-shrink: 0;
     background-color: #282c34;
     color: cornflowerblue;
     height: 80px;

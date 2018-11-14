@@ -34,7 +34,7 @@ class Friends extends Component {
                 {
                     friends.length ? friends.map(x => <div>todo: friend</div>) : <div className="friend-list-result">{this.state.search ? "No match" : "Start adding friends !"}</div>
                 }
-                <Arrow onClick={this.toggle} className="friend-toggle" style={{left: props.left}}/>
+                <img src={Arrow} onClick={this.toggle} className="friend-toggle" style={{left: props.left}}/>
             </div>
         }
         </Spring>

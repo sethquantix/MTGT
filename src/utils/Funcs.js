@@ -8,3 +8,11 @@ export const parseParameters = path => {
     }, {});
 };
 
+export const toLocale = date => {
+    const opts = { month: 'long', day: 'numeric', hour12: true, hour: '2-digit', minute: '2-digit' };
+
+    const _date = new Date(date);
+    return _date.toLocaleDateString('en-US', opts);
+}
+
+export const grnRand = () => Math.floor(1 + Math.random() * Math.floor(274));

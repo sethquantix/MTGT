@@ -1,6 +1,7 @@
 
-const uri = "http://localhost:3000";
+const client = process.env.NODE_ENV === "production" ? "adffdn8fw3qmj1mn9ulk1jw4d9wnq8" : "ffmytki05p9we8ubrs4tx3jbiprl6j";
 
+const uri = process.env.NODE_ENV === "production" ? "https://mtgtournaments.org/api" : "http://localhost:3000";
 
 const getUsers = async (payload) => {
     const res = await fetch(uri + "/users");
@@ -73,14 +74,52 @@ const getAvailable = async ({ id, scope }) => {
     return await res.json();
 };
 
+const create = async ({ owner, ...data }) => {
+    data = {...data, owner: owner};
+    const res = await fetch(uri + '/events/new', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + owner
+        },
+        body: JSON.stringify(data)
+    });
+    return await res.json();
+};
+
+const searchChannel = async ({ query }) => {
+    if (!query) {
+        return {res: []};
+    }
+    const res = await fetch("https://api.twitch.tv/kraken/search/channels?query=" + encodeURIComponent(query), {
+        headers: {
+            "Client-ID": client
+        }
+    });
+    return await res.json();
+};
+
+const searchImage = async ({query}) => {
+    if (!query) {
+        return {res: []};
+    }
+    const res = await fetch("https://api.scryfall.com/cards/autocomplete?q=" + query);
+    return await res.json();
+};
+
 const Api = {
     getUsers,
+    Scryfall: {
+        searchImage,
+    },
     Events: {
         getRegistered,
         getCreated,
-        getAvailable
+        getAvailable,
+        create
     },
     Twitch: {
+        searchChannel,
         twitchAuth,
         twitchLogin,
         twitchProfile

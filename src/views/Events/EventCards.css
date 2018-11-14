@@ -1,0 +1,78 @@
+
+
+.EventCard-bloc {
+    display: flex;
+    background-color: #141a21;
+}
+
+.EventCard-bloc-item {
+    margin: 5px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+}
+
+.EventCard-bloc-data {
+    margin: 5px;
+    flex: 1;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 250px;
+}
+
+.EventCard-art-container {
+    height: 100%;
+}
+
+.EventCard-art {
+    height: 100%;
+    object-fit: contain;
+}
+
+.EventCard-title {
+    font-size: calc(16px + 1vmin);
+    padding: 5px;
+    align-self: stretch;
+    text-align: center;
+    border-radius: 10px;
+    color: #61dafb;
+    background-color: #274060;
+}
+
+.EventCard-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.EventCard-list {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    margin-top: 5px;
+    overflow-y: auto;
+    max-height: 150px;
+}
+
+.EventCard-list-header {
+    align-self: center;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.EventCard-list-item {
+    margin-left: 10px;
+    font-size: calc(12px + 0.5vmin);
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.EventCard-list-thumb {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+    object-fit: contain;
+    border-radius: 16px;
+}
