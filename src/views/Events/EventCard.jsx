@@ -5,7 +5,7 @@ import Loading from "Components/Loading";
 class EventCard extends Component {
 
     content = (events, nope, event) => {
-        console.log(nope, events);
+
         if (events === null)
             return <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%'}}>
                 <Loading color="#61dafb"/>
@@ -19,12 +19,11 @@ class EventCard extends Component {
 
     render() {
         const {none, events, className = "", component, children = null } = this.props;
-        const content = this.content(events, none, component);
-        console.log(content);
+
         const classes = "Event-card " + className;
         return <Card className={classes} style={{backgroundColor: "#191F2B", color: "white"}}>
             {this.props.header && React.createElement(this.props.header, {})}
-            {content}
+            {this.content(events, none, component)}
             {children}
         </Card>
     }

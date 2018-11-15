@@ -1,5 +1,6 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import Api from "Utils/Api";
+import {ActionsTypes} from "Reducers/Profile";
 
 function *twitchAuth({payload}) {
     try {
@@ -28,16 +29,43 @@ function *login({payload}) {
     }
 }
 
-function *twitchProfile({payload}) {
+function *getProfile({payload}) {
     try {
-        const res = yield call(Api.Twitch.twitchProfile, payload);
+        const res = yield call(Api.Profile.getProfile, payload);
         console.log(res);
         if (res.err) {
             console.warn(res.err);
-        } else
-            yield put({type: "SET_TWITCH_PROFILE", payload: res});
+        } else {
+            yield put({type: ActionsTypes.SET_PROFILE, payload: res});
+        }
     } catch (e) {
         console.warn(e.message);
+    }
+}
+
+function *editMagicHandle({payload}) {
+    try {
+        const res = yield call(Api.Profile.handle, payload);
+        if (res.err) {
+            yield put({type: ActionsTypes.UPDATE_ERROR, payload: {err: res.err} });
+        } else {
+            yield put({type: ActionsTypes.SET_PROFILE, payload: res});
+        }
+    } catch (e) {
+        yield put({type: ActionsTypes.UPDATE_ERROR, payload: {err: e.msg } });
+    }
+}
+
+function *editMagicCode({payload}) {
+    try {
+        const res = yield call(Api.Profile.code, payload);
+        if (res.err) {
+            yield put({type: ActionsTypes.UPDATE_ERROR, payload: {err: res.err} });
+        } else {
+            yield put({type: ActionsTypes.SET_PROFILE, payload: res});
+        }
+    } catch (e) {
+        yield put({type: ActionsTypes.UPDATE_ERROR, payload: {err: e.msg} });
     }
 }
 
@@ -49,6 +77,14 @@ export function *loginSaga() {
     yield takeLatest("LOGIN", login);
 }
 
-export function *iconSaga() {
-    yield takeLatest("TWITCH_PROFILE", twitchProfile);
+export function *getProfileSaga() {
+    yield takeLatest(ActionsTypes.GET_PROFILE, getProfile);
+}
+
+export function *editHandleSaga() {
+    yield takeLatest(ActionsTypes.UPDATE_HANDLE, editMagicHandle);
+}
+
+export function *editCodeSaga() {
+    yield takeLatest(ActionsTypes.UPDATE_CODE, editMagicCode);
 }

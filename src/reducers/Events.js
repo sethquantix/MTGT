@@ -33,11 +33,18 @@ export const ActionsTypes = {
     SEARCH_IMAGES: "query scryfall images",
     FETCHED_IMAGES: "fetched images",
 
+    CREATE_EVENT: "create new event",
+
+    REGISTER: "register to event",
+    UNREGISTER: "unregister from event",
+    DID_REGISTER: "updated register / unregister",
+
     EVENTS_CREATE_FAILED: "event creation failed",
-    CREATE_EVENT: "create new event"
 };
 
 export const Actions = {
+    REGISTER_TO_EVENT(id) { return {type: ActionsTypes.REGISTER, payload: {eventId: id, id: Storage.Get("id") }}; },
+    UNREGISTER_FROM_EVENT(id) { return {type: ActionsTypes.UNREGISTER, payload: {eventId: id, id: Storage.Get("id") }}; },
     GET_AVAILABLE(scope = EVENTS.PUBLIC) { return {type: ActionsTypes.GET_AVAILABLE, payload: {id : Storage.Get("id"), scope: scope } }; },
     get GET_REGISTERED() { return {type: ActionsTypes.GET_REGISTERED, payload: Storage.Get("id") }; },
     get GET_OWNED() { return {type: ActionsTypes.GET_OWNED, payload: Storage.Get("id") }; },
@@ -79,6 +86,9 @@ const EventReducer = (state = defaultState, {type, payload}) => {
             break ;
         case ActionsTypes.EVENTS_FETCH_FAILED:
             state = {...state, events: []};
+            break ;
+        case ActionsTypes.DID_REGISTER:
+            state = {...state, updated: {ok: true}};
             break ;
         case ActionsTypes.CREATED_FETCH_FAILED:
             state = {...state, created: []};

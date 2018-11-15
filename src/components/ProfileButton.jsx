@@ -1,7 +1,7 @@
 import React, { Component }  from 'react';
 import { connect } from 'react-redux';
 
-import {getActionTwitchProfile, getActionLogout} from "Reducers/Profile";
+import { getActionLogout, getActionProfile} from "Reducers/Profile";
 import Loading from "Components/Loading";
 import Link from "Components/Link";
 import {withRouter} from "react-router-dom";
@@ -14,7 +14,7 @@ class ProfileButton extends Component {
     componentDidMount() {
 
         if (!this.props.logo) {
-            this.props.getIcon(this.props.token);
+            this.props.getProfile();
         }
     }
 
@@ -48,7 +48,6 @@ class ProfileButton extends Component {
 
 const mapStateToProps = state => {
     return {
-        token: state.ProfileReducer.token,
         logo: state.ProfileReducer.profile.twitch && state.ProfileReducer.profile.twitch.logo
     }
 };
@@ -56,7 +55,7 @@ const mapStateToProps = state => {
 const dispatch = dispatch => {
     return {
         logout: () => dispatch(getActionLogout()),
-        getIcon: token => dispatch(getActionTwitchProfile(token))
+        getProfile: () => dispatch(getActionProfile())
     }
 }
 

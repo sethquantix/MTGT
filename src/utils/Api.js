@@ -1,3 +1,4 @@
+import Storage from "Root/Storage";
 
 const client = process.env.NODE_ENV === "production" ? "adffdn8fw3qmj1mn9ulk1jw4d9wnq8" : "ffmytki05p9we8ubrs4tx3jbiprl6j";
 
@@ -33,8 +34,8 @@ const twitchLogin = async token => {
     return await res.json();
 };
 
-const twitchProfile = async token => {
-    const res = await fetch(uri + "/twitch/profile", {
+const getProfile = async token => {
+    const res = await fetch(uri + "/users/profile", {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + token
@@ -88,6 +89,7 @@ const create = async ({ owner, ...data }) => {
 };
 
 const searchChannel = async ({ query }) => {
+    query = encodeURIComponent(query);
     if (!query) {
         return {res: []};
     }
@@ -100,6 +102,7 @@ const searchChannel = async ({ query }) => {
 };
 
 const searchImage = async ({query}) => {
+    query = encodeURIComponent(query);
     if (!query) {
         return {res: []};
     }
@@ -107,8 +110,64 @@ const searchImage = async ({query}) => {
     return await res.json();
 };
 
+const code = async ({ code }) => {
+    const res = await fetch(uri + "/users/profile", {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + Storage.Get("id")
+        },
+        body: JSON.stringify({magicCode: encodeURIComponent(code)})
+    });
+    console.log(res);
+    return await res.json();
+};
+
+const handle = async ({ handle }) => {
+    const res = await fetch(uri + "/users/profile", {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + Storage.Get("id")
+        },
+        body: JSON.stringify({magicHandle: encodeURIComponent(handle)})
+    });
+    return await res.json();
+};
+
+const register = async ({eventId, id }) => {
+    const res = await fetch(uri + '/events/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + id
+        },
+        body: JSON.stringify({id: eventId})
+    });
+    const json = await res.json();
+    console.log(json);
+    return json;
+};
+
+const unregister = async ({eventId, id }) => {
+    const res = await fetch(uri + '/events/unregister', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + id
+        },
+        body: JSON.stringify({id: eventId})
+    });
+    return await res.json();
+};
+
 const Api = {
     getUsers,
+    Profile: {
+        code,
+        handle,
+        getProfile
+    },
     Scryfall: {
         searchImage,
     },
@@ -116,13 +175,14 @@ const Api = {
         getRegistered,
         getCreated,
         getAvailable,
-        create
+        create,
+        register,
+        unregister
     },
     Twitch: {
         searchChannel,
         twitchAuth,
-        twitchLogin,
-        twitchProfile
+        twitchLogin
     }
 };
 

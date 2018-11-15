@@ -1,4 +1,8 @@
 
+.Profile-field {
+    margin: 10px 0px;
+}
+
 .Event-body {
     display: flex;
     flex-direction: column;
@@ -142,5 +146,21 @@
     height: 80px;
     display: flex;
     flex-direction: column;
+    align-items: stretch;
+}
+
+.Event-card-header-left {
+    position: absolute;
+    height: 100%;
+    left: 10px;
+    top: 2px;
+}
+
+.Event-data {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 10px;
+    color: #868488;
     align-items: stretch;
 }

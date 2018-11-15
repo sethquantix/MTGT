@@ -62,8 +62,10 @@ function *fetchStreamers({payload}) {
     const res = yield call (Api.Twitch.searchChannel, payload);
     if (res.err)
         yield put({ type: ActionsTypes.FETCHED_STREAMER, payload: {res: []}});
-    else
-        yield put({ type: ActionsTypes.FETCHED_STREAMER, payload: {res: res.channels.map(({display_name, logo}) => ({display_name, logo}))}});
+    else {
+        console.log(res.channels);
+        yield put({ type: ActionsTypes.FETCHED_STREAMER, payload: {res: res.channels.map(({display_name, logo, url, _links}) => ({display_name, logo, url, _links}))}});
+    }
 }
 
 function *fetchImages({payload}) {
@@ -72,6 +74,22 @@ function *fetchImages({payload}) {
         yield put({ type: ActionsTypes.FETCHED_IMAGES, payload: {res: []}});
     else
         yield put({ type: ActionsTypes.FETCHED_IMAGES, payload: {res: res.data}});
+}
+
+function *register({payload}) {
+    const res = yield call (Api.Events.register, payload);
+    if (res.err)
+        yield put({type: ActionsTypes.UPDATE_ERROR, payload: {err: res.err }});
+    else
+        yield put({type: ActionsTypes.DID_REGISTER, payload: {}})
+}
+
+function *unregister({payload}) {
+    const res = yield call (Api.Events.unregister, payload);
+    if (res.err)
+        yield put({type: ActionsTypes.UPDATE_ERROR, payload: {err: res.err }});
+    else
+        yield put({type: ActionsTypes.DID_REGISTER, payload: {}})
 }
 
 export function *fetchRegisteredSaga() {
@@ -96,4 +114,12 @@ export function *createEventSaga() {
 
 export function *fetchImageSaga() {
     yield takeLatest(ActionsTypes.SEARCH_IMAGES, fetchImages);
+}
+
+export function *registerSaga() {
+    yield takeEvery(ActionsTypes.REGISTER, register);
+}
+
+export function *unregisterSaga() {
+    yield takeEvery(ActionsTypes.UNREGISTER, unregister);
 }

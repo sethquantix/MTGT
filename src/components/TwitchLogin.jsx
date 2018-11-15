@@ -6,7 +6,6 @@ import {connect} from "react-redux";
 import Loading from "Components/Loading";
 import { parseParameters } from "Utils/Funcs";
 import { getActionTwitchAuth, setActionLoginError} from "Reducers/Profile";
-import Storage from "Root/Storage";
 
 class TwitchLogin extends Component {
 
@@ -19,7 +18,7 @@ class TwitchLogin extends Component {
             this.props.error("Bad state");
             return ;
         }
-        this.props.login(params.code);
+        this.props.auth(params.code);
     }
 
     render() {
@@ -47,7 +46,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        login: code => dispatch(getActionTwitchAuth(code)),
+        auth: code => dispatch(getActionTwitchAuth(code)),
         error: msg => dispatch(setActionLoginError(msg))
     }
 };

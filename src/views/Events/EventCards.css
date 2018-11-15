@@ -30,9 +30,17 @@
     object-fit: contain;
 }
 
+.EventCard-timer {
+    position: absolute;
+    height: 100%;
+    right: 10px;
+    color: #A2C563;
+}
+
 .EventCard-title {
     font-size: calc(16px + 1vmin);
     padding: 5px;
+    position: relative;
     align-self: stretch;
     text-align: center;
     border-radius: 10px;
@@ -65,8 +73,16 @@
     font-size: calc(12px + 0.5vmin);
     margin-top: 10px;
     display: flex;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
     align-items: center;
     margin-bottom: 10px;
+}
+
+.EventCard-list-item:hover {
+    border-bottom: 1px solid #423070;
+    width: fit-content;
 }
 
 .EventCard-list-thumb {

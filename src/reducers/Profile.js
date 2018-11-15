@@ -14,9 +14,12 @@ export const ActionsTypes = {
     LOGIN_FAILED: "LOGIN_FAILED",
     TWITCH_AUTH: "TWITCH_AUTH",
     LOGIN: "LOGIN",
-    GET_TWITCH_PROFILE: "TWITCH_PROFILE",
-    SET_TWITCH_PROFILE: "SET_TWITCH_PROFILE",
-    LOGOUT: "logout"
+    GET_PROFILE: "GET_PROFILE",
+    SET_PROFILE: "SET_PROFILE",
+    LOGOUT: "logout",
+    UPDATE_HANDLE: "update magic handle",
+    UPDATE_CODE: "update magic friend code",
+    UPDATE_ERROR: "update error"
 };
 
 const actionLogin = (state, payload) => {
@@ -32,9 +35,9 @@ const actionAuthSucceed = (state, payload) => {
     return {...state, connected: true, profile: {}, token: payload.data, connecting: false};
 };
 
-const actionSetTwitch = (state, twitch) => {
-    return {...state, profile: {...state.profile, twitch: twitch}};
-};
+const actionSetProfile = (state, profile) => {
+    return {...state, profile: {...state.profile, ...profile, twitch: {...state.profile.twitch, ...profile.twitch}}};
+}; // WARN THAT CAN BREAK IF PROFILE GETS MORE NESTED
 
 const actionLoginFailed = (state, payload) => {
     console.warn(payload);
@@ -45,10 +48,12 @@ const actionLogout = (state) => {
     return {...state, connected: false, token: null };
 };
 
+export const getActionUpdateHandle = v => ({type: ActionsTypes.UPDATE_HANDLE, payload: { handle: v} });
+export const getActionUpdateCode = v => ({type: ActionsTypes.UPDATE_CODE, payload: { code: v} });
 
 export const getActionTwitchAuth = code => ({type: ActionsTypes.TWITCH_AUTH, payload: code});
 export const getActionLogin = token => ({type: ActionsTypes.LOGIN, payload: token});
-export const getActionTwitchProfile = token => ({type: ActionsTypes.GET_TWITCH_PROFILE, payload: token});
+export const getActionProfile = () => ({type: ActionsTypes.GET_PROFILE, payload: Storage.Get("id")});
 export const getActionLogout = () => ({type: ActionsTypes.LOGOUT, payload: {}});
 
 export const setActionLoginError = msg => ({type: ActionsTypes.LOGIN_FAILED, payload: msg});
@@ -65,8 +70,8 @@ export default ( state = initialState, action) => {
         case ActionsTypes.AUTH_SUCCEED:
             state = actionAuthSucceed(state, action.payload);
             break ;
-        case ActionsTypes.SET_TWITCH_PROFILE:
-            state = actionSetTwitch(state, action.payload);
+        case ActionsTypes.SET_PROFILE:
+            state = actionSetProfile(state, action.payload);
             break ;
         case ActionsTypes.LOGIN_SUCCEED:
             state = actionLoginSucceed(state, action.payload);

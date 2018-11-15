@@ -133,3 +133,51 @@
     font-size: 16px;
     padding: 7px 0px 13px 0px;
 }
+
+.updatable-container {
+    display: flex;
+    height: 30px;
+    align-items: center;
+}
+
+.updatable-input {
+    width: 120px;
+    height: 30px;
+    margin: 0px 20px;
+    border: none;
+    color: white;
+    border-bottom: 1px solid #61dafb;
+    background-color: transparent;
+}
+
+.updatable-input:focus {
+    outline: none;
+    border-bottom: 1px solid #282c34;
+}
+
+.updatable-name {
+    width: 160px;
+    font-size: 16px;
+}
+
+.updatable-edit {
+    height: 30px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 0px 20px;
+    cursor: pointer;
+    background-color: #124512;
+}
+
+.updatable-cancel {
+    height: 30px;
+    cursor: pointer;
+    border: none;
+    margin: 10px;
+    background-color: transparent;
+    border-radius: 5px;
+    color: white;
+}
+

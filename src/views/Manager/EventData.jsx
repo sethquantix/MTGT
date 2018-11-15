@@ -56,7 +56,7 @@ const EventData = ({state, handle, select, search, channels, classes}) => {
                 <RadioGroup row={false} onChange={handle("scope")} value={state.scope} items={Object.keys(EVENTS)}
                             valueFromItem={item => EVENTS[item]} labelFromItem={scopeToText} classes={{row: classes.row}} />
                 {state.streaming &&
-                <Search query={state.query} onSelect={select} onChange={search} results={channels} />
+                <Search menu={{backgroundColor: "#282c34", left: 0, bottom: 40, position: "absolute"}} query={state.query} onSelect={select} onChange={search} results={channels} />
                 }
             </div>
             {state.streaming && <Streamers streamers={state.streamers} />}

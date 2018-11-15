@@ -5,7 +5,7 @@ import { Actions } from 'Reducers/Events';
 import { connect } from 'react-redux';
 import Card from "@material-ui/core/Card";
 import Loading from "Components/Loading";
-import OwnedEvent from "Views/Events/OwnedEvent";
+import Event from "Views/Manager/Event";
 import RegisteredEvent from "Views/Events/RegisteredEvent";
 import EventCard from "Views/Events/EventCard";
 import AvailableHeader from "Views/Events/AvailableHeader";
@@ -25,30 +25,37 @@ class Events extends Component {
 
     reload = () => {
         this.props.getRegisteredEvents();
-        this.props.getCreatedEvents();
         this.props.getAvailableEvents();
     };
 
+    componentDidUpdate(prevProps) {
+        if (this.props.updated !== prevProps.updated)
+            this.reload();
+    }
+
     render() {
-        console.log(this.props.events, this.props.owned);
         return <div className="Event-body">
-            <EventCard events={this.props.owned} none={none.Owned} component={OwnedEvent} />
             <EventCard events={this.props.events} none={none.Registered} component={RegisteredEvent} />
-            <EventCard events={this.props.available} none={none.Available} header={AvailableHeader} component={AvailableEvent} />
+            <EventCard events={this.props.available.filter(x => !x.users.find(e => e.magic === this.props.magic))}
+                       none={none.Available} header={AvailableHeader}
+                       component={AvailableEvent} />
         </div>
     }
 }
 
 const mapStateToProps = state => {
     return {
-        events: state.EventsReducer.events,
-        owned: state.EventsReducer.created,
-        available: state.EventsReducer.list
+        updated: state.EventsReducer.updated,
+        magic: state.ProfileReducer.profile.magicHandle,
+        events: state.EventsReducer.events || [],
+        available: state.EventsReducer.list || []
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        register: id => dispatch(Actions.REGISTER_TO_EVENT(id)),
+        unregister: id => dispatch(Actions.UNREGISTER_FROM_EVENT(id)),
         getRegisteredEvents: () => dispatch(Actions.GET_REGISTERED),
         getCreatedEvents: () => dispatch(Actions.GET_OWNED),
         getAvailableEvents:  () => dispatch(Actions.GET_AVAILABLE())

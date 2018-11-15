@@ -3,9 +3,9 @@ import {Button} from "@material-ui/core";
 
 import { connect } from 'react-redux';
 import EventCard from "Views/Events/EventCard";
-import Event from "Views/Manager/Event";
 import {Actions} from "Reducers/Events";
 import NewEvent from "Views/Manager/NewEvent";
+import Event from "Views/Manager/Event";
 
 class EventManager extends Component {
 
@@ -24,11 +24,11 @@ class EventManager extends Component {
             return ;
         if (!data.count)
             return ;
-        const {name, streamers, count, scope, code, date, hours, minutes, time, format } = data;
+        const {name, streamers, set, count, scope, code, date, hours, minutes, time, format } = data;
         const event_time = new Date(date);
         event_time.setHours(hours + 24 * time, minutes);
         console.log(event_time);
-        this.props.create({name, streamers, count, scope, code, event_time, format });
+        this.props.create({name, streamers, count: parseInt(count), scope, code, event_time, format, set });
         this.close();
     };
 
