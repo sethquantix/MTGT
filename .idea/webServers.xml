@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="42bdc722-a2c1-4024-9926-ae25c549f736" name="remote" url="http://mtgtournaments.org">
+        <fileTransfer host="mtgtournaments.org" port="22" privateKey="C:\Users\Seth\.ssh\id_rsa" rootFolder="/var/www/MTGT/client" accessType="SFTP" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

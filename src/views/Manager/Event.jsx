@@ -29,7 +29,7 @@ const Event = ({event}) => {
                         {event.streamers.map(x => <div className="EventCard-list-item"><img className="EventCard-list-thumb" src={x.logo} /><div>{x.display_name}</div></div>)}
                     </div>}
                 </div>
-                <Button className="EventCard-register">Register</Button>
+                <Button className="EventCard-register">Edit</Button>
             </div>
         </div>
     </Card>

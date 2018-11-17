@@ -29,26 +29,27 @@ class ProfileButton extends Component {
 
     hoverOut = () => this.setState({hover: false});
 
-    getProfile = () => <div className="button-login" style={{position: 'relative'}}>
+    getProfile = logo => <div className="button-login" style={{position: 'relative'}}>
         <div onMouseLeave={this.hoverOut} onMouseEnter={this.hover} className="button-logout-container" style={{display: this.state.hover ? 'flex' : 'none'}}>
             <div className="button-logout" onClick={this.logout}><div>Logout</div></div>
         </div>
         <Link classes="button-login" path="/profile">
             <div className="button-login" onMouseEnter={this.hover} onMouseLeave={this.hoverOut}>
-                <img className="profile-logo" src={this.props.logo} />
+                <img className="profile-logo" src={logo} />
                 <div style={{flexShrink: 0, width: 80}}>Profile</div>
             </div>
         </Link>
     </div>;
 
     render() {
-        return this.props.logo ? this.getProfile() : <Loading />;
+        const logo = this.props.profile && this.props.profile.twitch && this.props.profile.twitch.logo;
+        return logo ? this.getProfile(logo) : <Loading />;
     }
 }
 
 const mapStateToProps = state => {
     return {
-        logo: state.ProfileReducer.profile.twitch && state.ProfileReducer.profile.twitch.logo
+        profile: state.ProfileReducer.profile
     }
 };
 

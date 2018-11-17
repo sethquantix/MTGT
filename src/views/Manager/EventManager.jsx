@@ -17,19 +17,23 @@ class EventManager extends Component {
 
     open = () => this.setState({open: true});
 
-    close = () => this.setState({open: false});
+    close = () => {
+        this.setState({open: false});
+        setTimeout(() => this.props.saveEvent(null), 500);
+    };
 
     validate = data => {
         if (!data.name)
-            return ;
+            return false;
         if (!data.count)
-            return ;
+            return false;
         const {name, streamers, set, count, scope, code, date, hours, minutes, time, format } = data;
         const event_time = new Date(date);
         event_time.setHours(hours + 24 * time, minutes);
         console.log(event_time);
         this.props.create({name, streamers, count: parseInt(count), scope, code, event_time, format, set });
         this.close();
+        return true;
     };
 
     render() {
@@ -50,6 +54,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        saveEvent: event => dispatch(Actions.SAVE_EVENT(event)),
         getCreatedEvents: () => dispatch(Actions.GET_OWNED),
         create: data => dispatch(Actions.CREATE_EVENT(data))
     }

@@ -10,6 +10,7 @@ const defaultState = {
     events: null,
     created: null,
     list: null,
+    savedEvent: null,
     channels: [],
     images: [],
     scope: EVENTS.PUBLIC
@@ -22,10 +23,8 @@ export const ActionsTypes = {
     STORE_EVENTS: "store events",
     STORE_CREATED: "store created events",
     STORE_AVAILABLE: "store available events",
-    AVAILABLE_FETCH_FAILED: "available fetch failed",
-    CREATED_FETCH_FAILED: "created fetch failed",
-    EVENTS_FETCH_FAILED: "events fetch failed",
-    FETCH_FAILED: "fetch failed",
+
+    SAVE_EVENT: "save new event",
 
     SEARCH_STREAMERS: "query streamer",
     FETCHED_STREAMER: "fetched streamer",
@@ -39,10 +38,15 @@ export const ActionsTypes = {
     UNREGISTER: "unregister from event",
     DID_REGISTER: "updated register / unregister",
 
+    FETCH_FAILED: "fetch failed",
+    AVAILABLE_FETCH_FAILED: "available fetch failed",
+    CREATED_FETCH_FAILED: "created fetch failed",
+    EVENTS_FETCH_FAILED: "events fetch failed",
     EVENTS_CREATE_FAILED: "event creation failed",
 };
 
 export const Actions = {
+    SAVE_EVENT(event) {return { type: ActionsTypes.SAVE_EVENT, payload: event}},
     REGISTER_TO_EVENT(id) { return {type: ActionsTypes.REGISTER, payload: {eventId: id, id: Storage.Get("id") }}; },
     UNREGISTER_FROM_EVENT(id) { return {type: ActionsTypes.UNREGISTER, payload: {eventId: id, id: Storage.Get("id") }}; },
     GET_AVAILABLE(scope = EVENTS.PUBLIC) { return {type: ActionsTypes.GET_AVAILABLE, payload: {id : Storage.Get("id"), scope: scope } }; },
@@ -63,6 +67,10 @@ const onStoreEvents = (state, {events}) => {
 
 const onStoreAvailable = (state, {events}) => {
     return {...state, list: events};
+};
+
+const onEventSave = (state, event) => {
+    return {...state, savedEvent: event};
 };
 
 const onStoreCreated = (state, {events}) => {
@@ -89,6 +97,9 @@ const EventReducer = (state = defaultState, {type, payload}) => {
             break ;
         case ActionsTypes.DID_REGISTER:
             state = {...state, updated: {ok: true}};
+            break ;
+        case ActionsTypes.SAVE_EVENT:
+            state = onEventSave(state, payload);
             break ;
         case ActionsTypes.CREATED_FETCH_FAILED:
             state = {...state, created: []};
