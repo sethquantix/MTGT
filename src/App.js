@@ -7,6 +7,7 @@ import blue from '@material-ui/core/colors/blue';
 
 import './App.css';
 import './Event.css';
+import './Stream.css';
 import './Components.css';
 
 const theme = createMuiTheme({

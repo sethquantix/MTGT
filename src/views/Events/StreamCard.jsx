@@ -7,16 +7,38 @@ class StreamCard extends Component {
         return false
     }
 
-    render() {
-        return <iframe
-            src={"https://player.twitch.tv/?channel=" + this.props.channel["display_name"] + "&autoplay=false"}
-            height="300"
-            width="400"
-            allowFullScreen={true}
-            scrolling="no"
+    getFrames() {
+        let frames = [];
+        console.log(this.props.event);
+        this.props.event.streamers.map(streamer => {
+            frames.push(<iframe src={"https://player.twitch.tv/?channel=" + streamer["display_name"] + "&autoplay=false"}
+                                height="300"
+                                width="400"
         >
-        </iframe>
+
+            </iframe>
+
+
+        )
+        });
+        return frames;
     }
+
+    render() {
+        return <div>
+            <hr/>
+            <h2>{this.props.event.name} Stream's</h2>
+            <hr/>
+            <div>
+                {
+                    this.getFrames()
+                }
+            </div>
+        </div>
+
+    }
+
+
 }
 
 export default StreamCard
