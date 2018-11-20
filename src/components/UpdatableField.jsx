@@ -40,7 +40,7 @@ class UpdatableField extends Component {
             <div className="updatable-name">{propName}</div>
             {this.state.update ?
                 <React.Fragment>
-                    <input className="updatable-input" value={this.state.value} onChange={this.edit}/>
+                    <input className="updatable-input" placeholder={this.props.placeholder || ""} value={this.state.value} onChange={this.edit}/>
                     <button className="updatable-cancel" onClick={this.cancel}>Cancel</button>
                     <button className="updatable-edit" onClick={this.validate}>Edit</button>
                 </React.Fragment> :

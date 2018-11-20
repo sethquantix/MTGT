@@ -26,7 +26,7 @@ class Profile extends Component {
         return <div className="Event-body">
             <Card  className="Event-card" style={{padding: 20, backgroundColor: "#191F2B", color: "white"}}>
                 <UpdatableField container="Profile-field" validate={this.validate("magicHandle")} propName={"MTGA username :"} prop={this.props.magicHandle}/>
-                <UpdatableField container="Profile-field" validate={this.validate("magicCode")} propName={"MTGA friend code :"} prop={this.props.magicCode}/>
+                <UpdatableField placeholder="eg 98765" container="Profile-field" validate={this.validate("magicCode")} propName={"MTGA friend code :"} prop={this.props.magicCode}/>
             </Card>
         </div>
     }
