@@ -1,7 +1,7 @@
 .streams {
-    overflow-y: scroll;
-    margin-left: 10px;
-}
+     overflow-y: scroll;
+     margin-left: 10px;
+ }
 
 .streamButton {
     width: 400px;
