@@ -57,7 +57,6 @@ class SingleStream extends Component {
         return <div>
             <Button onClick={() => this.close()}>Close</Button>
             <div id="twitch-embed">
-                //Twitch screen will go in here.
             </div>
         </div>
 
