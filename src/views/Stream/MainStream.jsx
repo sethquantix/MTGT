@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import StreamCard from "Views/Events/StreamCard";
+
+import StreamCard from "./StreamCard";
 import {connect} from 'react-redux'
 import Api from '../../utils/Api'
 
-class Streams extends Component {
+class MainStream extends Component {
     state = {
         events: []
     };
@@ -44,4 +45,4 @@ const mapStateToProps = state => {
 };
 
 
-export default connect(mapStateToProps)(Streams);
+export default connect(mapStateToProps)(MainStream);
